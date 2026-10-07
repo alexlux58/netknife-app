@@ -1,0 +1,11 @@
+---
+description: NetKnife-App is a self-hosted nginx+Node fork — not the AWS serverless repo
+alwaysApply: true
+---
+
+This tree is **NetKnife-App** (VM / nginx). Read `AGENTS.md` and `docs/ARCHITECTURE-LOCAL.md` before editing.
+
+- Keep Lambda `exports.handler` + `ROUTES` in `server/index.js`. Do not rewrite tools as Express routers.
+- Frontend API base is `/api` (nginx strips prefix). Rebuild `frontend/dist` after env or UI changes.
+- Local auth (`VITE_LOCAL_AUTH`) and billing stub (`LOCAL_FULL_ACCESS`) are required for a working VM.
+- Do not add Terraform/Cognito/CloudFront unless the user asks to reconnect AWS.

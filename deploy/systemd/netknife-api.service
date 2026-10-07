@@ -1,0 +1,22 @@
+# Host install (no Docker). Edit WorkingDirectory if the tree is not /opt/netknife.
+# Pair with deploy/nginx/netknife.conf. Keys: EnvironmentFile=-/opt/netknife/server/.env
+#
+#   sudo cp deploy/systemd/netknife-api.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now netknife-api
+
+[Unit]
+Description=NetKnife local API (Lambda adapter)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/netknife/server
+Environment=PORT=3001
+Environment=LOCAL_FULL_ACCESS=true
+Environment=LOCAL_MEMORY_CACHE=true
+Environment=LOCAL_USERNAME=alexlux
+ExecStart=/usr/bin/node index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

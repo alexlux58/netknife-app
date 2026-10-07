@@ -1,0 +1,13 @@
+**/.DS_Store
+**/.env
+**/.env.*
+# Vite variables are public build-time configuration. This reviewed file must
+# be present so the self-hosted image is compiled with local auth enabled.
+!frontend/.env.production
+**/*.key
+**/*.pem
+**/__pycache__
+**/node_modules
+frontend/dist
+infra
+packer

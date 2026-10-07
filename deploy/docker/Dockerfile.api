@@ -1,0 +1,20 @@
+# API-only image. nginx is a separate Compose service (see docker-compose.yml).
+# We install the repo-root AWS SDKs so Lambda handlers can `require()` at load time.
+# prepare-shared.sh copies netknife-common into each function (no Lambda layer here).
+FROM node:20-bookworm-slim
+
+WORKDIR /opt/netknife
+
+COPY package.json ./
+COPY backend ./backend
+COPY server ./server
+COPY scripts/prepare-shared.sh ./scripts/prepare-shared.sh
+
+RUN chmod +x ./scripts/prepare-shared.sh \
+ && npm install --omit=dev \
+ && ./scripts/prepare-shared.sh \
+ && cd server && npm install --omit=dev
+
+ENV PORT=3001
+EXPOSE 3001
+CMD ["node", "server/index.js"]

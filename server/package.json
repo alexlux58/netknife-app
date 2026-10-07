@@ -1,0 +1,13 @@
+{
+  "name": "netknife-app-server",
+  "private": true,
+  "description": "Local Node adapter that wraps NetKnife Lambda handlers for nginx",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "prepare:shared": "bash ../scripts/prepare-shared.sh"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -39,7 +39,7 @@ jobs:
       frontend: ${{ steps.filter.outputs.frontend }}
       infra: ${{ steps.filter.outputs.infra }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -97,7 +97,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:
@@ -139,7 +139,7 @@ jobs:
     needs: [test, changes, deploy-readiness]
     if: needs.changes.outputs.infra == 'true' && needs.deploy-readiness.outputs.ready == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Configure AWS credentials
         uses: ./.github/actions/aws-auth
@@ -199,7 +199,7 @@ jobs:
       (needs.changes.outputs.frontend == 'true' || needs.changes.outputs.infra == 'true') &&
       (needs.deploy-infra.result == 'success' || needs.deploy-infra.result == 'skipped')
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Configure AWS credentials
         uses: ./.github/actions/aws-auth
@@ -297,7 +297,7 @@ jobs:
     needs: [deploy-frontend]
     if: needs.deploy-frontend.result == 'success'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Configure AWS credentials
         uses: ./.github/actions/aws-auth
